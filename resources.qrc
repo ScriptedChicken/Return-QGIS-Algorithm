@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/return_pyqgis_algorithm" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>
