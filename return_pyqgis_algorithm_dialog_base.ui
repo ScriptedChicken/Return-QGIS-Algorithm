@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>118</height>
+    <height>137</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>80</y>
+     <y>100</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -35,7 +35,7 @@
      <x>10</x>
      <y>10</y>
      <width>381</width>
-     <height>61</height>
+     <height>79</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -48,6 +48,16 @@
     </item>
     <item>
      <widget class="QLineEdit" name="lineEdit"/>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="virtualLayerCheckBox">
+      <property name="text">
+       <string>Autofill for virtual layer</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

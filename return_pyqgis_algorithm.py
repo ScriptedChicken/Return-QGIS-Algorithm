@@ -24,7 +24,7 @@
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication, Qt
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction, QCompleter, QMessageBox
-from qgis.core import QgsApplication
+from qgis.core import QgsApplication, QgsProcessing
 import os, fnmatch, sys
 from io import StringIO  # Python3
 from qgis import processing
@@ -190,16 +190,26 @@ class ReturnPyQGISAlgorithm:
                 action)
             self.iface.removeToolBarIcon(action)
 
-    def returnAlg(self):
+    def returnAlg(self):  
         # get params
+        returnResultStr = ''
+        getOutputStr = ''
+
         params = {}
         for param in self.alg.parameterDefinitions():
             params[param.name()] = param.defaultValue()
+
+        if self.dlg.virtualLayerCheckBox.isChecked():
+            returnResultStr = 'res = '
+            getOutputStr = '\noutput = res["OUTPUT"]'
+            if 'native' in self.alg.id():
+                params["OUTPUT"] = "TEMPORARY_OUTPUT"
+            else:
+                params["OUTPUT"] = 'QgsProcessing.TEMPORARY_OUTPUT'
     
-        params = str(params).replace(", ", ",\\\n\t")
-        params = str(params).replace("{", "{\n\t")
-        params = str(params).replace("}", "\n}")
-        function = f'processing.run("{self.alg.id()}", {params})'
+        paramsStr = str(params)
+        paramsStr = paramsStr.replace(", ", ",\\\n\t").replace("{", "{\n\t").replace("}", "\n}").replace("'QgsProcessing.TEMPORARY_OUTPUT'", 'QgsProcessing.TEMPORARY_OUTPUT')
+        function = f'{returnResultStr}processing.run("{self.alg.id()}", {paramsStr}){getOutputStr}'
         
         c.copy(function)
         message_function = function.replace("\t", "    ")
@@ -250,4 +260,3 @@ class ReturnPyQGISAlgorithm:
                 self.dlg.lineEdit.setText("")
                 self.run()
             pass
-
