@@ -202,13 +202,12 @@ class ReturnPyQGISAlgorithm:
         if self.dlg.virtualLayerCheckBox.isChecked():
             returnResultStr = 'res = '
             getOutputStr = '\noutput = res["OUTPUT"]'
-            if 'native' in self.alg.id():
-                params["OUTPUT"] = "TEMPORARY_OUTPUT"
-            else:
-                params["OUTPUT"] = 'QgsProcessing.TEMPORARY_OUTPUT'
+            params["OUTPUT"] = "TEMPORARY_OUTPUT"
     
         paramsStr = str(params)
-        paramsStr = paramsStr.replace(", ", ",\\\n\t").replace("{", "{\n\t").replace("}", "\n}").replace("'QgsProcessing.TEMPORARY_OUTPUT'", 'QgsProcessing.TEMPORARY_OUTPUT')
+        paramsStr = paramsStr.replace(", ", ",\\\n\t").replace("{", "{\n\t").replace("}", "\n}")
+        if 'native' not in self.alg.id():
+            paramsStr = paramsStr.replace("'TEMPORARY_OUTPUT'", 'QgsProcessing.TEMPORARY_OUTPUT')
         function = f'{returnResultStr}processing.run("{self.alg.id()}", {paramsStr}){getOutputStr}'
         
         c.copy(function)
