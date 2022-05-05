@@ -222,13 +222,13 @@ class ReturnPyQGISAlgorithm:
         if self.first_start == True:
             self.first_start = False
             self.dlg = ReturnPyQGISAlgorithmDialog()
-
+            self.keyErrorCount = 0
 
         # auto complete options       
         labelsToAlgs = {}                                          
         algSelection = []
         for alg in QgsApplication.processingRegistry().algorithms():
-            name = alg.name()
+            name = alg.displayName()
             # name = alg.displayName()
             provider = alg.provider().name()
             label = f"{name} ({provider})"
@@ -257,5 +257,10 @@ class ReturnPyQGISAlgorithm:
             except KeyError:
                 QMessageBox.critical(None, "Error", f"You must enter an existing algorithm in the text box. You entered: {text}")
                 self.dlg.lineEdit.setText("")
-                self.run()
+                self.keyErrorCount += 1
+                if self.keyErrorCount < 5:
+                    self.run()
+                else:
+                    # safegaurding against infinite input bug
+                    self.keyErrorCount = 0
             pass
