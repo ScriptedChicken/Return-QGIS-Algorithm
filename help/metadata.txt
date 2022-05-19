@@ -7,13 +7,13 @@ name=Return PyQGIS Algorithm
 qgisMinimumVersion=3.0
 description=Returns pyQGIS algorithms based on an algorithm name.
 version=0.1
-author=angushunt@xtra.co.nz
-email=angushunt@xtra.co.nz
+author=angusfhunt@gmail.com
+email=angusfhunt@gmail.com
 
 about=Provide a brief description of the plugin and its purpose.
 
-tracker=http://bugs
-repository=http://repo
+tracker=https://github.com/ScriptedChicken/Return-QGIS-Algorithm/issues
+repository=https://github.com/ScriptedChicken/Return-QGIS-Algorithm
 # End of mandatory metadata
 
 # Recommended items:

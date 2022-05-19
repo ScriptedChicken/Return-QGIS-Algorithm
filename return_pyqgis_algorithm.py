@@ -8,8 +8,8 @@
                               -------------------
         begin                : 2022-03-15
         git sha              : $Format:%H$
-        copyright            : (C) 2022 by angushunt@xtra.co.nz
-        email                : angushunt@xtra.co.nz
+        copyright            : (C) 2022 by Angus Hunt
+        email                : angusfhunt@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -31,9 +31,7 @@ from qgis import processing
 try:
     import clipboard as c
 except:
-    import subprocess
-    subprocess.check_call(['python', '-m', 'pip', 'install', 'clipboard'])
-    import clipboard as c
+    raise Exception("Python library 'clipboard' is not installed. To install it, follow these instructions: https://landscapearchaeology.org/2018/installing-python-packages-in-qgis-3-for-windows/")
 
 # Initialize Qt resources from file resources.py
 from .resources import *
