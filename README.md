@@ -6,6 +6,10 @@ Currently supports:
 - Ctrl+Alt+Space to open the tool
 - Output automatically copied to clipboard
 
+Uses:
+- QGIS
+- Python
+
 ![View upon opening](./img/return_qgis_algorithm_example_1.png)  
 *Image 1: View upon opening*
 
